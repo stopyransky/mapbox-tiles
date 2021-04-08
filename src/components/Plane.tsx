@@ -4,21 +4,14 @@ import * as THREE from "three";
 const shaders = {
   vertexShader: `
     uniform sampler2D terrain;
-
     uniform float bumpScale;
-
     varying vec2 vUV;
-
+    
     void main() {
-
       vUV = uv;
-
       vec4 bumpData = texture2D(terrain, uv);
-
       float vAmount = (bumpData.r * 256.0 * 256.0 + bumpData.g * 256.0 + bumpData.b) * 0.1;
-      
       vec3 newPosition = position + normal * bumpScale * vAmount;
-
       gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
     }
 `,
